@@ -1,0 +1,40 @@
+.games-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 20px;
+  }
+  
+  .game {
+    width: 15%; /* Reduced width to fit two elements side-by-side on larger screens */
+    padding: 12px; /* Reduced padding to compensate for the reduced width */
+    background-color: rgba(70, 60, 60, 0.733);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .game:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .game-content {
+    margin-bottom: 16px;
+  }
+  
+  .game-items {
+    margin-bottom: 16px;
+  }
+  
+  .game-id {
+    text-align: right;
+  }
+  
+  @media (max-width: 768px) {
+    .game {
+      width: 90%; /* On smaller screens, go back to full width */
+    }
+  }

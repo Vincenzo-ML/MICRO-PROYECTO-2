@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import './Gamesearch.css';
 import { ArrayGames } from '../../../firebase.js';
 
+
 const Gamesearch = () => {
   const [gamesData, setGamesData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -26,12 +27,14 @@ const Gamesearch = () => {
 
   if (searchQuery !== "") {
     for (let j = 0; j < gamesData.length; j++) {
+      console.log(100)
       if (gamesData[j].titulo.toLowerCase().includes(searchQuery.toLowerCase())) {
         console.log(gamesData[j])
         filteredGames.push(gamesData[j]);
       }
     }
   }
+  
 
   const gamesToRender = filteredGames.length > 0 ? filteredGames : gamesData;
 

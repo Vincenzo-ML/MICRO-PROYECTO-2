@@ -6,7 +6,7 @@
 }
 
 .club {
-  width: 45%; /* Adjusted width to fit two elements side-by-side on larger screens */
+  width: 80%; /* Adjusted width to fit two elements side-by-side on larger screens */
   padding: 12px;
   background-color: rgba(70, 60, 60, 0.733);
 }

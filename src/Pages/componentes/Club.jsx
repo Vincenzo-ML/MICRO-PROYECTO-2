@@ -1,6 +1,7 @@
 import React from 'react'
 import './Club.css'
 
+
 const Club = ({ id, name, description, juegos = [] }) => {
   return (
     <div id={`club-${id}`} className="club">

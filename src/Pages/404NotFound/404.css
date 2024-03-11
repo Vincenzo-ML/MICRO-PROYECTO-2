@@ -1,0 +1,21 @@
+.not-found-container {
+  overflow: hidden;
+}
+
+.not-found-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.not-found-text {
+  font-size: 4rem;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.not-found-text:hover {
+  color: red;
+}

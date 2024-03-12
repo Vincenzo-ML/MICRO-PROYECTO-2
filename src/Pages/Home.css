@@ -17,7 +17,7 @@
   display: block;
   width: 100%;
   padding: 14px;
-  background-color: rgba(70, 60, 60, 0.733);
+  background-color: rgba(70, 60, 60, 0.329);
   color: white;
   border-radius: 4px; /* Add border-radius to .club-link */
 }
@@ -54,5 +54,9 @@
 .welcome {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
-}
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  
+  font-family: 'Arial', sans-serif; /* Familia de fuentes */
+  font-size: 25px; /* Tamaño de fuente */
+  line-height: 1.5; /* Altura de línea

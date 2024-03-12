@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import './Gamesearch.css';
 import { ArrayGames } from '../../../firebase.js';
 
-
 const Gamesearch = () => {
   const [gamesData, setGamesData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [filteredGames, setFilteredGames] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,50 +19,48 @@ const Gamesearch = () => {
     fetchData();
   }, []);
 
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const filteredGames = [];
-
-  if (searchQuery !== "") {
-    for (let j = 0; j < gamesData.length; j++) {
-      console.log(100)
-      if (gamesData[j].titulo.toLowerCase().includes(searchQuery.toLowerCase())) {
-        console.log(gamesData[j])
-        filteredGames.push(gamesData[j]);
-      }
+  useEffect(() => {
+    if (searchQuery !== '') {
+      const filtered = gamesData.filter((game) =>
+        game.titulo.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredGames(filtered);
+    } else {
+      setFilteredGames([]);
     }
-  }
-  
+  }, [searchQuery, gamesData]);
 
-  const gamesToRender = filteredGames.length > 0 ? filteredGames : gamesData;
+  const gamesToRender = searchQuery !== '' ? filteredGames : gamesData;
 
   return (
     <div className="gamesearch">
       <Navbar />
-      <h1>Welcome to Gamesearch Page!</h1>
+      <h1 className="welcome-text">Buscador de juegos</h1>
       <div className="search-container">
         <input
+          className="search-input"
           type="text"
-          placeholder="Search games..."
+          placeholder="Buscar juegos..."
           value={searchQuery}
-          onChange={handleSearch}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
       <div className="games-container mt-4">
-        {gamesToRender.map((game, index) => (
-          <Link key={index} to={`/juego/${game.ID}`}>
-            <div className="game-link">
-              <Game
-                id={game.ID}
-                title={game.titulo}
-                genre={game.genero}
-                description={game.descripcion}
-              />
-            </div>
-          </Link>
-        ))}
+        {gamesToRender.length > 0 && (
+          gamesToRender.map((game, index) => (
+            <Link key={index} to={`/juego/${game.ID}`}>
+              <div className="game-link">
+                <Game
+                  id={game.ID}
+                  title={game.titulo}
+                  genre={game.genero}
+                  description={game.descripcion}
+                  textColor="white" // Pasa la prop textColor al componente Game
+                />
+              </div>
+            </Link>
+          ))
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,50 @@
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .edit-button {
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    padding: 0 20px;
+    font-size: inherit;
+    height: 40px;
+  }
+  
+  .edit-button:hover {
+    text-decoration: underline;
+  }
+  
+  .separator-button {
+    margin: 0 10px;
+    height: 40px;
+    background-color: #ddd;
+  }
+
+  .game-favorito {
+    background-color: #333; /* Gris oscuro */
+    color: white;
+    padding: 10px;
+    text-align: left;
+    margin-left: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    font-size: 40px;
+    width: 98%;
+  }
+
+  .mem-title {
+    background-color: #333; /* Gris oscuro */
+    color: white;
+    padding: 10px;
+    text-align: left;
+    margin-left: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    width: 98%;
+  }

@@ -25,11 +25,22 @@ const Gamepage = () => {
   useEffect(() => {
     if (gamesData.length > 0) {
       const idg = Number(id);
-      const gameIndex = idg - 1;
 
-      if (gameIndex >= 0 && gameIndex < gamesData.length) {
-        const game = gamesData[gameIndex];
+    
+      function buscarIndicePorId(lista, idComparar) {
+        for (let i = 0; i < lista.length; i++) {
+          if (lista[i].ID === idComparar) {
+            return i;
+            
+          }
+        }
+        return -1; 
+      }
+      
 
+      if (idg >= 0) {
+        const game = gamesData[buscarIndicePorId(gamesData, id)];
+        
         setGameTitle(game.titulo);
         setGameDescription(game.descripcion);
         setGameGenero(game.genero);
@@ -40,10 +51,10 @@ const Gamepage = () => {
   return (
     <div className="Gamepage">
       <Navbar></Navbar>
-      <h1>Welcome to Game Page!</h1>
-      <h1>{gameTitle}</h1>
-      <h1>{gameDescription}</h1>
-      <h1>{gameGenero}</h1>
+      
+      <div className="game-title">{gameTitle}</div>
+      <div className="game-description">{gameDescription}</div>
+      <div className="game-genre">{gameGenero}</div>
    
     </div>
   );

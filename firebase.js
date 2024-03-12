@@ -157,23 +157,7 @@ export async function editUserByEmail(email, newData) {
   
   
 
-  export async function changeUserVideoGameByEmail(email, newVideoGame) {
-    try {
-      // Buscar al usuario por correo electrónico
-      const user = await findUserByEmail(email);
-      if (!user) {
-        return false; // Si no se encuentra al usuario, retornar falso
-      }
   
-      // Actualizar el videojuego preferido del usuario
-      const newData = { videojuego_preferido: newVideoGame };
-      const success = await editUserByEmail(email, newData);
-      return success;
-    } catch (error) {
-      console.log("Error changing user's video game: ", error);
-      return false;
-    }
-  }
   
 
   export async function addMembershipByEmail(email, membership) {

@@ -1,0 +1,115 @@
+
+fieldset {
+    width: 300px;
+    background-color: #fff;
+    padding: 10px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  
+
+  
+  fieldset ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  fieldset li {
+    margin-bottom: 10px;
+  }
+  
+  fieldset label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  fieldset input,
+  fieldset select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  fieldset button {
+    width: 100%;
+    padding: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  fieldset button:hover {
+    background-color: #0056b3;
+  }
+  
+  fieldset a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  fieldset a:hover {
+    text-decoration: underline;
+  }
+  
+  fieldset input,
+  fieldset select,
+  fieldset label,
+  fieldset button,
+  fieldset a {
+    color: #000;
+  }
+
+
+  legend {
+    text-align: center;
+    padding: 0.5em 0;
+    display: block;
+    width: 100%;
+  }
+
+
+  .a2 {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: white;
+    text-align: center;
+    text-decoration: none;
+    margin: 1em auto;
+    width: fit-content;
+    margin-left: 50%;
+  }
+
+  .google-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  button,
+  .google-button-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .google-button-container-1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  button,
+  .google-button-container-1 {
+    margin-left: auto;
+    margin-right: auto;
+  }

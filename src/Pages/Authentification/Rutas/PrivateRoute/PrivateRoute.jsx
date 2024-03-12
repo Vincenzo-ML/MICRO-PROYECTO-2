@@ -5,6 +5,7 @@ import { auth } from "../../../../../firebase";
 
 export function PrivateRoute({ children }) {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
@@ -13,13 +14,18 @@ export function PrivateRoute({ children }) {
         setUser(user);
       } else {
         setUser(null);
+        setTimeout(() => {
+          // Redirect the user to "/" after 5 seconds
+          window.location.href = "/";
+        }, 500);
       }
+      setIsLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, []); // The empty array makes the effect run only once
 
-  if (user === null) {
-    return <Navigate to="/" state={{ from: location }} replace />;
+  if (isLoading) {
+    return <h2>Loading...</h2>;
   }
 
   return children;

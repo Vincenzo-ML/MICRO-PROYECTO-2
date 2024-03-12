@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
-
+import { Navigate, useParams } from "react-router-dom";
+import "./perfil.css"
 import Navbar from '../componentes/Navbar';
 import { auth } from '../../../firebase';
 import { onAuthStateChanged } from "firebase/auth";
-import { ArrayUsers, createUser, findUserByEmail, editUserByEmail, changeUserVideoGameByEmail, addMembershipByEmail, removeMembershipByEmail } from '../../../firebase';
+import { ArrayUsers, createUser, findUserByEmail, editUserByEmail, addMembershipByEmail, removeMembershipByEmail } from '../../../firebase';
 import { ArrayGames } from '../../../firebase';
 import { ArrayClubs } from '../../../firebase';
 import Club from '../componentes/Club';
@@ -25,19 +25,9 @@ const Perfil = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [clubsData, setClubsData] = useState([]);
 
-    const [userNombre, setuserNombre] = useState([]);
-    const [userApellido, setuserApellido] = useState([]);
-    const [userEmail, setuserEmail] = useState([]);
-    const [username, setusername] = useState([]);
-    const [videojuego_pre, setvideojuego_pre] = useState([]);
 
     
     const [mostrarGamesContainer, setMostrarGamesContainer] = useState(true);
-    
-    const handleClick = () => {
-        history.push('/usedit');
-        
-      };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -107,15 +97,13 @@ const Perfil = () => {
 
     const handleLogout = async () => {
       try {
-          
-          await signOut(auth);
-          
-          console.log("Logged out successfully");
-          
+        
+        await signOut(auth);
+       
       } catch (error) {
-          console.error(error);
+        console.error(error);
       }
-  };
+    };
 
     const gameTitles = gamesData.map((game) => ({ title: game.titulo, id: game.id }));
 
@@ -124,16 +112,19 @@ const Perfil = () => {
     return (
         <div className="Gamepage">
           <Navbar></Navbar>
-          <h1>{user.email}</h1>
-          <h1>{userData.nombre}</h1>
-          
-          <h1>{userData.apellido}</h1>
+          <h1>Correo: {user.email}</h1>
+      
+          <h1>Nombre: <span className="dark-bg">{userData.nombre}</span> <span className="separator">|</span> Apellido: <span className="dark-bg">{userData.apellido}</span></h1>
 
-          <h1>{userData.username}</h1>
-          <h1>{}</h1>         <li>
-          <Link to="/Usedit">editar perfil</Link>
-        </li>
-          <h1>Videojuego Preferido</h1> 
+          <h1>Username: {userData.username}</h1>
+          <li style={{ backgroundColor: 'gray', borderRadius: '5px', listStyleType: 'none' }}>
+  <Link to="/Usedit" style={{ color: 'white', textDecoration: 'none' }}>editar perfil</Link>
+</li>
+        <div><button type="button" onClick={handleLogout}>
+  Logout
+  <Link to="/" replace />
+</button></div>
+         <div className="game-favorito">Videojuego Favorito</div>
           {mostrarGamesContainer ? (
             <div className="games-container mt-4">
               {filteredGames.map((game, index) => (
@@ -152,7 +143,12 @@ const Perfil = () => {
           ) : (
             <label>Texto del label</label>
           )}
-          clubs de los cuales eres parte
+          
+          <div className="mem-title">Membresias</div>
+         
+
+
+
           <div className="clubs-container">
             {filteredCLubs.map((club, index) => (
               <Link key={index} to={`/club/${club.ID}`}>
@@ -167,9 +163,7 @@ const Perfil = () => {
               </Link>
             ))}
           </div>
-          <div><button type="button" onClick={handleLogout}>
-                Logout
-              </button></div>
+  
         </div>
         
       );

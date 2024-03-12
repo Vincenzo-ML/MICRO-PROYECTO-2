@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { ArrayGames } from "../../../firebase";
-import { ArrayUsers, createUser, findUserByEmail, editUserByEmail, changeUserVideoGameByEmail, addMembershipByEmail, removeMembershipByEmail } from '../../../firebase';
+import { ArrayUsers, createUser } from '../../../firebase';
 import GoogleButton from 'react-google-button';
-import { googleProvider } from "../../../firebase";
-import { GoogleAuthProvider } from "firebase/auth";
 
+import { GoogleAuthProvider } from "firebase/auth";
+import "./LogReg.css"
 
 export const LogReg = ({ user }) => {
   const navigate = useNavigate(); // Add the useNavigate hook
@@ -36,6 +36,7 @@ export const LogReg = ({ user }) => {
       console.error(error);
     }
   };
+  
 
   const handleSignUpWithGoogle = async () => {
     try {
@@ -65,7 +66,7 @@ export const LogReg = ({ user }) => {
 
   const handleSignUp = async () => {
     if (!email || !password || !name || !lastName || !username) return;
-
+  
     const x = {
       nombre: name,
       apellido: lastName,
@@ -74,22 +75,27 @@ export const LogReg = ({ user }) => {
       videojuego_preferido: gameID,
       membresias: []
     }
-
+  
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      createUser(x)
+      createUser(x);
       await ArrayUsers();
       navigate("/home"); // Redirect to "/home" after successful sign up
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      if (error.code === 'auth/email-already-in-use') {
+        alert("Correo electrónico ya utilizado");
+      } else {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      }
     }
   };
 
   const handleSignIn = () => {
     if (!email || !password) return;
+  
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -99,7 +105,12 @@ export const LogReg = ({ user }) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+  
+        if (errorCode === 'auth/invalid-credential') {
+          alert("Correo o contraseña incorrectos");
+        } else {
+          console.log(errorCode, errorMessage);
+        }
       });
   };
 
@@ -134,8 +145,9 @@ export const LogReg = ({ user }) => {
     return <Navigate to="/home"></Navigate>;
   }
   return (
+    
     <section>
-      <h2>Homepage</h2>
+  
       
       <form>
         {isSignUpActive && <legend>Sign Up</legend>}
@@ -144,11 +156,11 @@ export const LogReg = ({ user }) => {
         <fieldset>
           <ul>
             <li>
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Email (ejemplo@gmail.com)</label>
               <input type="text" id="email" onChange={handleEmailChange} />
             </li>
             <li>
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Password (minimo 6 simbolos)</label>
               <input
                 type="password"
                 id="password"
@@ -189,9 +201,9 @@ export const LogReg = ({ user }) => {
               <button type="button" onClick={handleSignUp}>
                 Sign Up
               </button>
-              <div>
-                <GoogleButton onClick={handleSignUpWithGoogle} />
-              </div>
+              <div className="google-button-container-1">
+  <GoogleButton onClick={handleSignUpWithGoogle} />
+</div>
             </>
           )}
           {!isSignUpActive && (
@@ -199,15 +211,15 @@ export const LogReg = ({ user }) => {
               <button type="button" onClick={handleSignIn}>
                 Sign In
               </button>
-              <div>
-                <GoogleButton onClick={handleSignUpWithGoogle} />
-              </div>
+              <div className="google-button-container">
+  <GoogleButton onClick={handleSignUpWithGoogle} />
+</div>
             </>
           )}
         </fieldset>
-        {isSignUpActive && <a onClick={handleMethodChange}>Login</a>}
+        {isSignUpActive && <a className="a2" onClick={handleMethodChange}>Iniciar Sesion</a>}
         {!isSignUpActive && (
-          <a onClick={handleMethodChange}>Create an account</a>
+          <a className="a2" onClick={handleMethodChange}>Create an account</a>
         )}
       </form>
     </section>

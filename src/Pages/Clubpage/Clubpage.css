@@ -1,24 +1,76 @@
 .Clubpage {
-    padding-top: 60px; /* Ajusta este valor según el alto de tu Navbar */
-  }
+  padding-top: 60px; /* Ajusta este valor según el alto de tu Navbar */
+}
+.button {
+  background-color: #4CAF50; /* Verde */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Gamer Mono', monospace;
+  font-size: 17px;
+  border-radius: 4px;
+  margin-top: 10px;
+  width: 200px;
+  height: 50px;
+  transition: box-shadow 0.3s ease-in-out;
+  cursor: pointer; 
+}
 
-  .button {
-    background-color: #4CAF50; /* Verde */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 4px;
-  }
-  
-  .red-button {
-    background-color: #f44336; /* Rojo */
-  }
-  
-  .green-button {
-    background-color: #4CAF50; /* Verde */
-  }
-  
+.button:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Añade una sombra alrededor del botón al pasar el mouse por encima */
+}
+
+.red-button:hover {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Cambia el color de la sombra al rojo */
+}
+
+.green-button:hover {
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); /* Cambia el color de la sombra al verde */
+}
+
+.red-button {
+  background-color: #f44336; /* Rojo */
+}
+
+.green-button {
+  background-color: #4CAF50; /* Verde */
+}
+
+.club-name {
+  background-color: #333; /* Gris oscuro */
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.club-description {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+.games-title {
+  background-color: #333; /* Gris oscuro */
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  margin-top: 20px;
+  font-size: 24px;
+  width: 98%;
+}

@@ -1,3 +1,41 @@
 .Gamepage {
-    padding-top: 60px; /* Ajusta este valor según el alto de tu Navbar */
-  }
+  padding-top: 60px; /* Ajusta este valor según el alto de tu Navbar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-title {
+  background-color: #333; /* Gris oscuro */
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  margin-top: 20px;
+  font-size: 50px;
+  width: 98%;
+}
+
+.game-description {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  margin-top: 20px;
+  font-size: 20px;
+  width: 30%;
+  margin-top: 80px;
+  margin-bottom: 10px;
+}
+
+.game-genre {
+  background-color: #333; /* Gris oscuro */
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  margin-top: 20px;
+  font-size: 24px;
+  width: 30%;
+}

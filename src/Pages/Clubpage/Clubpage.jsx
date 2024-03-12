@@ -3,10 +3,9 @@ import './Clubpage.css';
 import Navbar from '../componentes/Navbar';
 import { ArrayClubs, ArrayGames } from '../../../firebase';
 import { useParams } from 'react-router-dom';
-import Club from '../componentes/Club';
 import Game from '../componentes/Game.jsx';
 import { Link } from 'react-router-dom';
-import { ArrayUsers, createUser, checkMembershipByEmail, updateMembershipByEmail, getMembershipsByEmail, findUserByEmail, editUserByEmail, changeUserVideoGameByEmail, addMembershipByEmail, removeMembershipByEmail } from '../../../firebase';
+import { checkMembershipByEmail, updateMembershipByEmail, getMembershipsByEmail, findUserByEmail} from '../../../firebase';
 import { auth } from '../../../firebase';
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -27,6 +26,9 @@ const Clubpage = () => {
   const [isMember, setIsMember] = useState(false);
   const [membres, setMembresias] = useState([]);
 
+
+
+  
   const { id } = useParams();
 
   useEffect(() => {
@@ -49,9 +51,21 @@ const Clubpage = () => {
     if (clubsData.length > 0) {
       const idc = Number(id);
       const clubIndex = clubsData.length - idc;
+      console.log(clubsData)
+
+
+      function buscarIndicePorId(lista, idComparar) {
+        for (let i = 0; i < lista.length; i++) {
+          if (lista[i].ID === idComparar) {
+            return i;
+            
+          }
+        }
+        return -1; 
+      }
 
       if (clubIndex >= 0 && clubIndex < clubsData.length) {
-        const club = clubsData[clubIndex];
+        const club = clubsData[buscarIndicePorId(clubsData, id)];
 
         setClubNombre(club.nombre);
         setClubDescripcion(club.descripcion);
@@ -120,29 +134,31 @@ const Clubpage = () => {
   return (
     <div className="Clubpage">
       <Navbar></Navbar>
-      <h1>Bienvenido a la página de inicio!</h1>
+     
 
-      <h1>{clubnombre}</h1>
-      <h1>{clubdescripcion}</h1>
-      <h1>{clubid}</h1>
-      <button
-        className={`button ${isMember ? 'red-button' : 'green-button'}`}
-        onClick={async () => {
-          console.log(isMember);
+      <h1 className="club-name">{clubnombre}</h1>
+      <div className="club-description">{clubdescripcion}</div>
+      <h1>ID del club = {clubid}</h1>
+      <div className="button-container">
+  <button
+    className={`button ${isMember ? 'red-button' : 'green-button'}`}
+    onClick={async () => {
+      console.log(isMember);
 
-          const updated = await updateMembershipByEmail(user.email, clubid);
-          if (updated) {
-            console.log("Membership updated successfully");
-          } else {
-            console.log("Error updating membership");
-          }
-          reloadPage();
-        }}
-      >
-        {isMember ? 'Leave Club' : 'Join Club'}
-      </button>
+      const updated = await updateMembershipByEmail(user.email, clubid);
+      if (updated) {
+        console.log("Membership updated successfully");
+      } else {
+        console.log("Error updating membership");
+      }
+      reloadPage();
+    }}
+  >
+    {isMember ? 'Salir del Club' : 'Unirse al Club'}
+  </button>
+</div>
 
-      <h1>Juegos:</h1>
+<div className="games-title">Juegos:</div>
       <div className="games-container mt-4">
         {filteredGames.map((game, index) => (
           <Link key={index} to={`/juego/${game.ID}`}>

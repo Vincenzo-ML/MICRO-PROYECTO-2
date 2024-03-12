@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase";
 import { ArrayGames } from "../../../firebase";
-import { ArrayUsers, createUser, findUserByEmail, editUserByEmail, changeUserVideoGameByEmail, addMembershipByEmail, removeMembershipByEmail } from '../../../firebase';
+import { findUserByEmail, editUserByEmail, addMembershipByEmail, removeMembershipByEmail } from '../../../firebase';
 import Navbar from "../componentes/Navbar";
 import { onAuthStateChanged } from "firebase/auth";
+import "./useredit.css";
 
 export const Useredit = () => {
   const [correo, setCorreo] = useState("");
@@ -15,7 +16,7 @@ export const Useredit = () => {
   const [isFetching, setIsFetching] = useState(true);
   const [userData, setUserData] = useState(null);
   const [videojuego_pre, setvideojuego_pre] = useState([]);
-  
+
   const [gamesData, setGamesData] = useState([]);
   const [gameTitle, setGameTitle] = useState('');
   const [gameID, setGameID] = useState('');
@@ -72,7 +73,7 @@ export const Useredit = () => {
     const apellido = lastName || userData.apellido;
     const userN = username || userData.username;
     const videojuego_preferido = gameID || userData.videojuego_preferido;
-  
+
     // Check if gameID is defined
     if (gameID !== undefined) {
       // Find the game with the selected title and set the gameID variable to its ID
@@ -95,28 +96,31 @@ export const Useredit = () => {
       console.error("Error: gameID is undefined");
     }
   };
-  
-  
+
+  const handleCancel = () => {
+    navigate("/perfil");
+  };
+
   return (
-    <section>
+    <section style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Navbar></Navbar>
       <h2>Editar datos</h2>
-      <ul>
-      <li>
-        <label htmlFor="username">Username</label>
-        <input type="text" id="username" value={username} onChange={handleUsernameChange} />
-      </li>
-        <li>
-          <label htmlFor="name">Name</label>
-          <input type="text" id="name" value={name} onChange={handleNameChange} />
-        </li>
-        <li>
-          <label htmlFor="lastName">Last Name</label>
-          <input type="text" id="lastName" value={lastName} onChange={handleLastNameChange} />
-        </li>
-        <li>
-          <label htmlFor="gameTitle">Game Title</label>
-          <select value={gameTitle} onChange={(e) => setGameTitle(e.target.value)}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input type="text" id="username" value={username} onChange={handleUsernameChange} style={{ width: "300px" }} />
+        </div>
+        <div>
+          <label htmlFor="name">Nombre</label>
+          <input type="text" id="name" value={name} onChange={handleNameChange} style={{ width: "300px" }} />
+        </div>
+        <div>
+          <label htmlFor="lastName">Apellido</label>
+          <input type="text" id="lastName" value={lastName} onChange={handleLastNameChange} style={{ width: "300px" }} />
+        </div>
+        <div>
+          <label htmlFor="gameTitle">Juego Favorito</label>
+          <select value={gameTitle} onChange={(e) => setGameTitle(e.target.value)} style={{ width: "300px" }}>
             <option value="">Select a game</option>
             {gameTitles.map((title) => (
               <option key={title.id} value={title.title}>
@@ -124,8 +128,12 @@ export const Useredit = () => {
               </option>
             ))}
           </select>
+        </div>
+        <div>
           <button onClick={handleSave} disabled={!name || !lastName || !gameID || !username}>Save</button>
-        </li>
-      </ul>
+          <button onClick={handleCancel}>Cancelar</button>
+        </div>
+      </div>
     </section>
-  );}
+  );
+}

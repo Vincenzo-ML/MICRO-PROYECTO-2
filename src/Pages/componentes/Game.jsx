@@ -4,7 +4,7 @@ import './Game.css' // Assuming you have a Game.css file
 const Game = ({ id, title, genre, description }) => {
   return (
     <div id={`game-${id}`} className="game">
-      <div className="game-content">
+      <div className="game-content white-text">
         <h2>{title}</h2>
         <p>{description}</p>
       </div>

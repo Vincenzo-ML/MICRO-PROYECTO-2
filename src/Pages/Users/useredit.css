@@ -1,0 +1,14 @@
+section {
+  margin-top: 5rem; 
+}
+
+label,
+input,
+select,
+button {
+  margin-bottom: 1rem; 
+}
+
+button {
+  margin-right: 1rem; 
+}
